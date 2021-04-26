@@ -1,20 +1,14 @@
-<! DOCTYPE html>
-<html>
-    <head>
-        <title>Victor's blog</title>
-    </head>
-    <body>
-        <header>
-            <h2><a href= "/"> Victor's Blog</a></h2>
-        </header>
-        
-        <article>
-            <time> published: 20.04.2021, 11:49</time>
-            <h3><a href=" "> My first post</a></h3>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-        </article>
+{% extends 'blog/base.html' %}
+{% load static %}
 
-        <p> Hi there!</p>
-        <p> It works!</p>
-    </body>
-</html>
+{% block content%}   
+    {% for post in posts %}
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h3><a href=" {% url 'post_detail' pk=post.pk %} ">{{ post.title}}</a></h3>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
